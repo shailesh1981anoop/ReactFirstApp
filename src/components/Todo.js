@@ -3,7 +3,9 @@ import React from 'react'
 import Head from './Head';
 import TodoList from './TodoList';
 import { TodoContext } from '../context/TodoContext';
-const initialState=[];
+import Reset from './Reset';
+import { Box, Button, Container, TextField } from '@mui/material';
+export const initialState=[];
 
 function init(initialState)
 { 
@@ -42,31 +44,38 @@ function Todo() {
      {
         dispatch({type:'ADD_TASK',paylod:username})
      }
-     function btnReset ()
-    {
-        debugger;
-        dispatch({type:'RESET_TASK',paylod:initialState})
-    }
+    //  function btnReset ()
+    // {
+    //     debugger;
+    //     dispatch({type:'RESET_TASK',paylod:initialState})
+    // }
 const data={
     todos,
+    dispatch
 }
-//console.log('in-',data)
+console.log('in-',data)
   return (
+    <Container>
+        <Box>
     <TodoContext.Provider value={{data}}>
     {/* <h2>TodoList {todos.length}</h2> */}
     <Head />
-    New  Test Item<input type='text' name="username"
+    New  Test Item<TextField type='text' name="username"
                     value={username}
                     placeholder="Enter User Name"
                     onChange={handleInputChange}
                     required
-                    label="username"></input>
-    <button 
+                    label="username"></TextField>
+    <Button variant='contained'
     onClick={btnAddClick}>
-        Add</button><button onClick={btnReset}>Reset</button>
-         <TodoList todos={todos} dispatch={dispatch} /> 
+        Add</Button>
+        <Reset />
+        {/* <button onClick={btnReset}>Reset</button> */}
+         <TodoList /> 
         
     </TodoContext.Provider>
+    </Box>
+    </Container>
   )
 }
 export default Todo
